@@ -1,0 +1,28 @@
+
+{% extends "base.html" %}
+
+{% block pageNavigation %}
+	<a href="{% url 'add_friend_course' %}">Enroll Courses</a>
+	
+{% endblock %}
+
+{% block pageBody %}
+
+<div>{% block AddFriendCourses %} {% endblock %}</div>
+<script type="text/javascript">
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+var first = getUrlVars()["url"];
+
+
+
+</script>
+{% endblock %}
+
+

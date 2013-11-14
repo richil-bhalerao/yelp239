@@ -1,0 +1,26 @@
+{% extends "findFriends/base.html" %}
+
+{% block course %}
+	<script type="text/javascript">
+var popupWindow=null;
+
+function child_open(link)
+{ 
+alert(link)
+var url1 = "http://"+link+":8080";
+if(link){
+popupWindow =window.open("","_blank","scrollbars=yes, width=1000, height=480,top=200,left=200");
+}
+}
+l
+</script>
+	<h3>Connected IPs</h3>
+		<p>Bottle Response : {{ links }}</p>
+		<table>
+		{% for link in links %}
+			<tr>
+				<td><a href="{% url 'find_friends_services' link %}">{{ link }}</a></td>
+			</tr>
+		{% endfor %}
+		</table>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+
+{% block pageTitle %}
+<br>
+<a href="{% url 'mysite.myproj.views.quiz' %}" style="text-decoration: none">Quiz</a>&nbsp; <a href="{% url 'mysite.myproj.views.announcement' %}" style="text-decoration: none">Announcement</a> &nbsp;
+<a href="{% url 'mysite.myproj.views.discussion' %}" style="text-decoration: none">Discussion</a>
+  <CENTER><h3> Course Detail </h3></CENTER>
+{% endblock %}
+
+{% block pageNavigation %}
+	<a href="{% url 'mysite.myproj.views.courseList' %}" style="text-decoration: none">Back</a>
+{% endblock %}
+ 
+{% block pageBody %}
+
+<CENTER>	
+	{% if success %}
+	
+	    <div  style='width:100%; align:center  text-align:center; float:left; clear:both;'>
+	    <table border="0" padding="2" cellspacing="15" '>
+			    <tr>
+					<td align="left"><b>Category Id</b></td> <td align="left"> {{ course.category }} </td>
+				</tr>
+				<tr>
+					<td align="left"><b>Course Title</b></td> <td align="left"> {{ course.title }} </td>
+				</tr>
+			    <tr>
+					<td align=""left""><b>Course Description</b></td> <td align="left"> {{ course.Description }} </td>
+				</tr>
+			    <tr>
+					<td align=""left""><b>Course Version</b></td> <td align="left"> {{ course.version }} </td>
+				</tr>
+			    <tr>
+					<td align=""left""><b>Section</b></td> <td align="left"> {{ course.section }} </td>
+				</tr>
+			    <tr>
+					<td align=""left""><b>Department</b></td> <td align="left"> {{ course.dept }} </td>
+				</tr>
+			    <tr>
+					<td align=""left""><b>Term</b></td> <td align="left"> {{ course.term }} </td>
+				</tr>
+			    <tr>
+					<td align=""left""><b>Year</b></td> <td align="left"> {{ course.year }} </td>
+				</tr>
+		</table>
+      <br> 
+      </div>
+
+     <div>
+    	    <table border="0" padding="2" cellspacing="15" >
+    	        <br>
+    	        
+    	        {% for c in course.instructor %} 
+				    <tr>
+						<td align="left"><b>Instructor Name</b></td> <td align="left"> {{c.name}}</td>
+					</tr>
+				    <tr>
+						<td align="left""><b>Email</b></td> <td align="left"> {{c.email}} </td>
+					</tr>
+					
+				{% endfor %}
+            </table>					
+
+       <br> 
+       
+       <table align="center">
+       
+        <tr>
+        <td> 
+		   <ul>
+		        Days <br>
+		        
+		         <ul>
+		           {% for day in course.days %} 
+		              {{day }}<br>
+		           {% endfor %}
+		         </ul>
+		   </ul>
+		   </td>      
+
+        <td> 
+		   <ul>
+		        Hours <br>
+		         <ul>
+		         {% for hour in course.hours %}
+		              {{hour}}<br>
+		         {% endfor %}
+		         </ul>
+		   </ul>
+	   </td>      
+		</tr>         
+    </table>
+  </div>
+  
+  {% endif %}
+
+</CENTER>
+	
+
+	
+
+	
+{% endblock %}

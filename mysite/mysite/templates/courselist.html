@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block pageTitle %}
+  <CENTER><h3> Course List </h3></CENTER>
+{% endblock %}
+
+{% block pageNavigation %}
+	
+{% endblock %}
+ 
+{% block pageBody %}
+<CENTER>	
+	{% if success %}
+	
+	    <table border="0" padding="2" cellspacing="15" height='300px'>
+	    <tr>
+		<th align="center">Course name</td>
+		<th align="center">Term</td>
+		<th align="center">Year</td>
+		
+		</tr>
+
+ 		{% for course in cjlist %} 
+  	        	<tr>
+  				<td align="left"> <a href="{% url 'mysite.enCourses.views.courseDetail' course.id %}" style="text-decoration: none"> &nbsp;&nbsp;{{ course.title }}</a> </td>
+  				<td align="left"> {{ course.term }} </td>
+  				<td align="left"> {{ course.year }} </td>
+  				
+  				</tr>
+		{% endfor %}
+
+		</table>
+	{% endif %}
+</CENTER>
+	
+{% endblock %}

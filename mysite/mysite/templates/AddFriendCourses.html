@@ -1,0 +1,15 @@
+{% extends "findFriendsServices.html" %}
+
+{% block AddFriendCourses %}
+		<table border="1" width="90%" align="center">
+		
+		{% for e in entries %} 
+			<tr>
+			
+	        	<td></br><u>Title:</u> {{ e.title }}</br><u>Category:</u> {{e.category}} </br><u>Term:</u> {{e.term}}</br><u>Description:</u> {{e.Description}}</br></br>
+			<td align="center"><a href="{% url 'enroll_course' userEmail CourseId%}"</a> ENROLL</td>
+			
+			</tr>
+		{% endfor %} 
+{% endblock%}
+

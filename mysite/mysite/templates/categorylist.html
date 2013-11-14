@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block pageTitle %}
+  <CENTER><h3> Category List </h3></CENTER>
+{% endblock %}
+
+{% block pageNavigation %}
+	<a href="{% url 'mysite.myproj.views.categoryManager' %}" style="text-decoration: none">Back</a>
+{% endblock %}
+ 
+{% block pageBody %}
+<CENTER>	
+	{% if success %}
+	    <table border="0" padding="2" cellspacing="15" height='300px'>
+	    <tr>
+		<th align="center">Category Name</td>
+		<th align="center">Description</td>
+		<th align="right">Creation Date</td>
+		<th align="right">Status</td>
+		</tr>
+
+ 		{% for cat in categoryList %} 
+  	        	<tr>
+  				<td align="left"> {{ cat.name }} </td>
+  				<td align="left"> {{ cat.description }} </td>
+  				<td align="left"> {{ cat.createDate }} </td>
+  				<td align="right"> {{ cat.status }} </td>
+  				</tr>
+		{% endfor %}
+
+		</table>
+	{% endif %}
+</CENTER>
+	
+{% endblock %}

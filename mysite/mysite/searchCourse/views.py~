@@ -1,0 +1,83 @@
+######For Demo Start
+#from django.http import HttpResponse
+#
+#def index(request):
+#	return HttpResponse("Index Page")
+######For Demo Start
+
+##Nik Code Starts
+
+from django.shortcuts import render_to_response
+import urllib2, urllib
+from mooc.apps.login.forms import SearchQueryForm
+import json
+import requests
+
+def searchCourse(request):
+	
+	print "Inside SearchCourse"
+	listFlag = True
+	searchFlag = False
+	
+	if request.method == "POST":
+		searchQueryForm = SearchQueryForm(request.POST)
+		if searchQueryForm.is_valid():
+			listFlag = False
+			searchFlag = True
+			#query = searchQueryForm.cleaned_data['search']
+	else:
+		searchQueryForm = SearchQueryForm()
+	#print('http://localhost:8080/courses/'+query)
+	#entries1 = urllib2.urlopen('http://localhost:8080/courses/'+query)
+	
+	
+	if request.POST:
+		print "http://localhost:8080/course/search/"+request.POST["search"]		
+		#entries1 = urllib2.urlopen('http://localhost:8080/course/search/'+request.POST["search"])
+		#jsondata= json.loads(entries1.read())
+	else: 
+		entries1 = urllib2.urlopen('http://localhost:8080/course/list')
+		jsondata= json.loads(entries1.read())
+	#code input
+	#jsondata= json.parse(json.loads(entries1.read()))
+	#jsondata= json.dumps(request.POST)
+	print jsondata
+	
+
+
+	
+	
+	#print jsondata["courses"]
+	#code ends
+	#print ("The message returned from bottle: ", entries1.read())
+	# "query" : query,
+	ctx = {"searchQueryForm" : searchQueryForm , "listFlag" : listFlag, "searchFlag" : searchFlag, "entries" : jsondata}
+	#info = {"info1" : "This is info1", "info2" : "This is info2"}
+	#success=True
+	#ctx = {"entries" : info, "success" : success}
+
+	return render_to_response('searchCourse/searchCourseIndex.html',ctx)
+
+def enrollCourse(request,email,id1):
+	print "ID in enrollCourse : ",id1
+	data = {"email" : email , "courseid" : id1}
+	headers = {'content-type' : 'application/json'} 
+#	data1 = urllib.urlencode(data)
+	enrollData = json.dumps(data)
+	#CourseEnrolled = urllib2.urlopen('http://'+request.get_host()+'/course/enroll',data)
+	courseEnrolled = requests.post('http://localhost:8080/course/enroll',data=enrollData,headers=headers)
+	print courseEnrolled
+	print 'http://'+request.get_host()+'/course/enroll'
+	ctx = {"userEmail" : email, "courseId" : id1}
+	return render_to_response('enrollCourse/enrollCourse.html', ctx)
+
+
+
+
+
+
+
+
+
+
+##Nik Code Ends

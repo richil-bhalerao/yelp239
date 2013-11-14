@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block pageTitle %}
+  <CENTER><h3> Add Category </h3></CENTER> <p>
+{% endblock %}
+
+{% block pageNavigation %}
+	<a href="{% url 'mysite.myproj.views.categoryManager' %}" style="text-decoration: none"> Back</a>
+{% endblock %}
+
+{% block pageBody %}
+  <CENTER>	 
+	 <form action="categoryAdd" method="post" > 
+         {{ form.as_p }} 
+         <p><input type="submit" value="Add" /></p>
+     </form>
+   </CENTER> 
+    <br>
+
+{% endblock %}
+

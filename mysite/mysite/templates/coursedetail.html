@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block pageTitle %}
+<br>
+<a href="{% url 'mysite.enCourses.views.quiz' %}" style="text-decoration: none">Quiz</a>&nbsp; <a href="{% url 'mysite.enCourses.views.announcement' %}" style="text-decoration: none">Announcement</a> &nbsp;
+<a href="{% url 'mysite.enCourses.views.discussion' %}" style="text-decoration: none">Discussion</a>
+  <CENTER><h3> Course Detail </h3></CENTER>
+{% endblock %}
+
+{% block pageNavigation %}
+<a href="{% url 'mysite.enCourses.views.courseList' %}" style="text-decoration: none">Back</a>	
+{% endblock %}
+ 
+{% block pageBody %}
+<CENTER>	
+	<p>Course detail Page</p>
+</CENTER>
+	
+{% endblock %}

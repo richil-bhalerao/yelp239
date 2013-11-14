@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block pageNavigation %}
+	<a href="{% url 'mysite.myproj.views.courseManager' %}" style="text-decoration: none">Back</a>
+{% endblock %}
+
+{% block pageTitle %}
+  <CENTER><h3> Course List </h3></CENTER>
+{% endblock %}
+
+{% block pageBody %}
+<CENTER>	
+
+	{% if success %}
+	    <table border="0" padding="2" cellspacing="15" height='300px'>
+	    <tr>
+		<th align="center">Category Id</td>
+		<th align="center">Course Title</td>
+		</tr>
+
+ 		{% for course in cjlist %} 
+  	        	<tr>
+  				<td align="left"> {{ course.category }} </td>
+  				<td align="left"> <a href="{%url 'mysite.myproj.views.courseDetail' course.id %}" style="text-decoration: none"> &nbsp; {{ course.title }} </a> </td>
+  				</tr>
+		{% endfor %}
+
+		</table>
+	{% endif %}
+</CENTER>
+	
+{% endblock %}
