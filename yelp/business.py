@@ -12,7 +12,7 @@ class Business(object):
     
     def __init__(self):
         print 'business created'
-        # create storag 
+        # create storage
         self.__store = Storage()
         
         
@@ -39,4 +39,6 @@ class Business(object):
         except:
             traceback.print_exc()
             return 'failed'
+
+print 'hello'
     
