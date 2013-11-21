@@ -38,25 +38,25 @@ class RecoEngine(object):
         
         rest = Restaurants()
         longlat = rest.getLatLongFromZipCode(zipcode)
-        
+
         #distance is miles/3959 = radians
         vicinityList = rest.getRestaurantsInVicinity(longlat, 0.03)
-        
+
         similarityList = []
-        
+
         for l in vicinityList:
-            
+
             categories = set(l['categories'])
             simIndex = self.computeJaccardIndex(categories, preference)
             record = (l, simIndex)
             similarityList.append(tuple(record))
-            
+
         #Sort the list in decreasing order of similarity
         similarityList = sorted(similarityList, key=itemgetter(1), reverse=True)
-        
+
         return similarityList
 
 
-list = RecoEngine().findMostSimilarRestaurants('85053', set(['Fast Food', 'Sandwiches']))
+list = RecoEngine().findMostSimilarRestaurants('85053', set(['wafaigaou', 'wafaigaou']))
 for i in range(0, 4):
     print list[i]

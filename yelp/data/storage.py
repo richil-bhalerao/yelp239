@@ -14,17 +14,17 @@ class Storage(object):
     db = None 
     
     def __init__(self):
-       # initialize our storage, data is a placeholder
-       self.data = {}
-       # for demo
-       self.data['created'] = time.ctime()
+        # initialize our storage, data is a placeholder
+        self.data = {}
+        # for demo
+        self.data['created'] = time.ctime()
        
-       #Ric Start
-       connection = Connection('localhost', 27017)
-       #Create db object only if it is not created 
-       if self.db is None:
-           self.db = connection.yelpdb
-       #Ric End
+        #Ric Start
+        connection = Connection('localhost', 27017)
+        #Create db object only if it is not created 
+        if self.db is None:
+            self.db = connection.yelpdb
+        #Ric End
     
     
     #######################################Ric Start############################################
@@ -68,5 +68,7 @@ class Storage(object):
         except:
             traceback.print_exc() 
             return "All data cannot be retrieved"
-        
-     
+
+
+# for r in Storage().get('restaurants', 'business_id', 'jvvh4Q00Hq2XyIcfmAAT2A'):
+#     print r

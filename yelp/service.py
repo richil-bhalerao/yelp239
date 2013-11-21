@@ -19,34 +19,40 @@ from bson.objectid import ObjectId
 from json import JSONEncoder
 
 from business import Business
-#Ric End
+from restaurants import Restaurants
+from RecoEngine import RecoEngine
 
+#Ric End
 
 #Ric Start
 businessobj = None
+restaurant = None
 #Ric End
 
 def setup(base,conf_fn):
-   print '\n**** service initialization ****\n'
-   global businessobj  
-   businessobj = Business()
+    print '\n**** service initialization ****\n'
+    global businessobj  
+    businessobj = Business()
+    global restaurant
+    restaurant = Restaurants()
 
 #################################Ric Start#######################################################
 
 @route('/business/:id', method='GET')
 def get_business(id):
     print 'You are in get business service'
-    
+
     try:
         entity = businessobj.get(id)
     except:
         traceback.print_exc()
         abort(404, 'business cannot be retrieved')    
-        
+
     if not entity:
         abort(404, 'No business with id %s' % id)       
-        
+
     return MongoEncoder().encode(entity)
+
 
 @route('/business/list', method='GET')
 def getAll_business():
@@ -58,13 +64,11 @@ def getAll_business():
     except:
         traceback.print_exc()
         abort(404, 'businesss cannot be retrieved')    
-        
+
     if not entity:
         abort(404, 'No business found')       
-        
+
     return  MongoEncoder().encode(entity)
-        
-        
 
 
 class MongoEncoder(JSONEncoder):
@@ -73,13 +77,56 @@ class MongoEncoder(JSONEncoder):
             return str(obj)
         else:
             return JSONEncoder.default(obj, **kwargs)     
-     
-
-
-
-
-
-
 
 #################################### Ric - End ##############################################
 
+
+@route('/restaurants/:iD', method = 'GET')        
+def getRestaurant(iD):        
+    print "you are in getRestaurant()"
+
+    try:
+        entity = restaurant.get(iD)
+    except:
+        traceback.print_exc()
+        abort(404, 'restaurants cannot be retrieved')
+
+    if not entity:
+        abort(404, 'restaurant not found')
+
+    return MongoEncoder().encode(entity)
+
+
+@route('/restaurants/zipcode/:zip', method = 'GET')
+def getRestaurantsForZipcode(zipcode):
+    print "getRestaurantsForZipcode()"
+    try:
+        entity = restaurant.getForZip(zipcode)
+    except:
+        traceback.print_exc()
+        abort(404, 'restaurants cannot be retrieved')
+
+    if not entity:
+        abort(404, 'restaurants cannot be retrieved')
+
+    return MongoEncoder().encode(entity)
+
+@route('/recommendation/:params', method = 'PUT')
+def getRecommendation(params):
+    print "getRecommendation()"
+    try:
+        print params
+        response = {}
+        reco = RecoEngine()
+        result = reco.findMostSimilarRestaurants(params['zipcode'], params['preference'])
+        return result
+    except:
+        abort(404, 'recommendation failed')
+
+input = ['xoz', 'bagga'] 
+params = {'zipcode': '85044', 'preference': input}
+list = getRecommendation(params)
+for i in list:
+    print i
+
+    

@@ -40,5 +40,5 @@ class Business(object):
             traceback.print_exc()
             return 'failed'
 
-print 'hello'
+#print 'hello'
     
