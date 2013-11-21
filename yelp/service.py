@@ -111,22 +111,33 @@ def getRestaurantsForZipcode(zipcode):
 
     return MongoEncoder().encode(entity)
 
-@route('/recommendation/:params', method = 'PUT')
+@route('/recommendation/:params', method = 'GET')
 def getRecommendation(params):
     print "getRecommendation()"
     try:
         print params
         response = {}
         reco = RecoEngine()
-        result = reco.findMostSimilarRestaurants(params['zipcode'], params['preference'])
-        return result
+        response['decision'] = reco.isRecommended(params['zipcode'], params['preference'])
+        if response['decision'] == -1:
+            response['decision'] = 'NA'
+        else:
+            response['records'] = reco.findMostSimilarRestaurants(params['zipcode'], params['preference'])
+
+        return response
+
     except:
         abort(404, 'recommendation failed')
 
-input = ['xoz', 'bagga'] 
-params = {'zipcode': '85044', 'preference': input}
-list = getRecommendation(params)
-for i in list:
-    print i
+input = ['Indian', 'Buffets', 'Paratha'] 
+params = {'zipcode': '85048', 'preference': input}
+#list = 
+result = getRecommendation(params)
+print "Decision: "+str(result['decision'])
+print "Records: "
+for l in result['records']:
+    print l
+#for i in list:
+ #   print i
 
     

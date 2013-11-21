@@ -77,7 +77,7 @@ class RecoEngine(object):
         
         if similarityList == None:
             print "No restaurants exist in the vicinity"
-            return True
+            return -1
         
         if len(similarityList)==0:
             print "No restaurants found that were similar to one that you propose"
