@@ -25,7 +25,7 @@ class Restaurants(object):
 
         query = { "loc" : { "$maxDistance" : distance, "$near" : longlat} }
 
-        cursor = self.db['restaurants'].find(query)
+        cursor = self.db['restaurants'].find(query, {"_id":0})
 
         recordList =  [c for c in cursor]
 

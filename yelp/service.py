@@ -111,13 +111,17 @@ def getRestaurantsForZipcode(zipcode):
 
     return MongoEncoder().encode(entity)
 
-@route('/recommendation/:params', method = 'GET')
-def getRecommendation(params):
+@route('/recommendation', method = 'POST')
+def getRecommendation():
     print "getRecommendation()"
     try:
+        params = request.body.read()
+        
         print params
+        params = json.loads(params)
         response = {}
         reco = RecoEngine()
+        print reco.isRecommended(params['zipcode'], params['preference'])
         response['decision'] = reco.isRecommended(params['zipcode'], params['preference'])
         if response['decision'] == -1:
             response['decision'] = 'NA'
@@ -127,17 +131,19 @@ def getRecommendation(params):
         return response
 
     except:
+        traceback.print_exc()
         abort(404, 'recommendation failed')
 
-input = ['Indian', 'Buffets', 'Paratha'] 
-params = {'zipcode': '85048', 'preference': input}
-#list = 
-result = getRecommendation(params)
-print "Decision: "+str(result['decision'])
-print "Records: "
-for l in result['records']:
-    print l
-#for i in list:
- #   print i
+# 
+# input = ['Indian', 'Buffets', 'Paratha'] 
+# params = {'zipcode': '85048', 'preference': input}
+# #list = 
+# result = getRecommendation(params)
+# print "Decision: "+str(result['decision'])
+# print "Records: "
+# for l in result['records']:
+#     print l
+# #for i in list:
+#  #   print i
 
     
