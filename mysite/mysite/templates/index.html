@@ -76,7 +76,7 @@
 <!-- ###################################################################################################-->
 
 <div class="container">
-	<h1 class="text-info">Recommendation system for setting up a new restaurant</h1>
+	<h1 class="text-info">Restaurant Recommender v1.0</h1>
 	<br>
 	<nav class="navbar navbar-default" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
@@ -107,12 +107,21 @@
 </nav>
 
 <div class="jumbotron">
-    <h2 class="text-info">What the system is meant for?</h2>
-    <p>This system will enable a user to identify which location is good for setting up a new restaurant based on: 
-    	1) Speciality of food
-    	2) Cuisine and 
-    	3) Type of restaurant.</p>
- 
+    <h2 class="text-info">Welcome to Restaurant Recommender</h2>
+    <h3 class="text-info">What does our system do?</h3>
+    <p>
+    Our system will tell you if it is a good idea to set up a restaurant 
+    in a particular area (based on zipcode), given:<br> 
+    	1) Type of restaurant<br>
+    	2) Cuisine<br>
+    	3) Speciality</p>
+
+	<h3 class="text-info">How do we do it?</h3>
+    <p>
+    We use our custom developed algorithm to:<br>
+    1)Find restaurants in the area<br>
+    2)Find restaurants similar to your parameters<br>
+    3)Depending on the result of the above comparison, return a decision</p> 
     <!--<a href="#" class="btn btn-large btn-success">Get Started</a>-->
 </div>
 
@@ -127,6 +136,7 @@
       <label class="control-label" for="zipcode"><font class="text-info"><h3> Zip Code </h3> </font></label>
        <div class="controls">
         <input class="form-control" style="width:300px;" id="zipcode" placeholder="Enter Zip Code">
+        <span class="help-block">Currently we are limited to Phoenix, AZ region.</span>
       </div>
     </div><!-- /clearfix -->
   <br>
