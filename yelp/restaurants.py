@@ -37,6 +37,8 @@ class Restaurants(object):
 
         query = {"full_address": { "$regex": "\w*%s$" %(zipcode)}}
         data = self.db['restaurants'].find_one(query)
+        if (data==None):
+            return None
         return data['loc']
 
     #get a restaurants using it's ID

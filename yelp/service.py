@@ -21,7 +21,7 @@ from json import JSONEncoder
 from business import Business
 from restaurants import Restaurants
 from RecoEngine import RecoEngine
-
+from operator import itemgetter, attrgetter
 #Ric End
 
 #Ric Start
@@ -116,18 +116,21 @@ def getRecommendation():
     print "getRecommendation()"
     try:
         params = request.body.read()
-        
-        print params
         params = json.loads(params)
+        
         response = {}
         reco = RecoEngine()
-        print reco.isRecommended(params['zipcode'], params['preference'])
+        
         response['decision'] = reco.isRecommended(params['zipcode'], params['preference'])
         if response['decision'] == -1:
             response['decision'] = 'NA'
         else:
-            response['records'] = reco.findMostSimilarRestaurants(params['zipcode'], params['preference'])
-
+            list = RecoEngine().findMostSimilarRestaurants(params['zipcode'], params['preference'])
+            result = []
+            for l in list:
+                result.append({"record":l[0], "simIndex":l[1]})    
+            response['records'] = result
+        
         return response
 
     except:
@@ -137,13 +140,8 @@ def getRecommendation():
 # 
 # input = ['Indian', 'Buffets', 'Paratha'] 
 # params = {'zipcode': '85048', 'preference': input}
-# #list = 
-# result = getRecommendation(params)
-# print "Decision: "+str(result['decision'])
-# print "Records: "
-# for l in result['records']:
-#     print l
-# #for i in list:
-#  #   print i
+
+#{"zipcode":85048,
+#"preference": ["Indian", "Buffets", "Paratha"]}
 
     

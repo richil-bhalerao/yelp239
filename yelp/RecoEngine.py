@@ -86,7 +86,7 @@ class RecoEngine(object):
         for l in similarityList:
             rating = l[0]['stars']
             simIndex = l[1]
-            if  (rating >= 3.5) and (simIndex>=0.5):
+            if  (rating >3.5) and (simIndex>0.4):
                 print "We found a high rated restaurant which is very similar to to your preference..."
                 print "User Preference: ", preference
                 print "Categories: ", json.dumps(l[0]['categories'])
@@ -99,13 +99,11 @@ class RecoEngine(object):
             
         
 
-
-# list = RecoEngine().findMostSimilarRestaurants('85057', set(['Fast Food', 'Sandwiches']))
 # for i in range(0, 4):
 #      print list[i]
 
 
-# print RecoEngine().isRecommended('85054', ['Sandwiches', 'Fast Food', 'Amercian'])
+#print RecoEngine().isRecommended('85054', ['Sandwiches', 'Fast Food', 'Amercian'])
 # print "------------------------------------"
 # print RecoEngine().isRecommended('85048', ['Indian', 'Buffets', 'Paratha'])
     
