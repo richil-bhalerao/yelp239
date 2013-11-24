@@ -7,8 +7,10 @@
 import time
 
 import traceback
+import random
 from pymongo import Connection
 from data.storage import Storage
+from jinja2._compat import traceback_type
 
 
 class Restaurants(object):
@@ -59,8 +61,20 @@ class Restaurants(object):
             return self.db['restaurants'].find(query)
         except:
             return 'failed'
-        
-        
+
+    #get random restaurant in Phoenix, AZ.
+    def getRandom(self):
+        print 'getRandom()'
+        try:
+            count = self.db['restaurants'].count()
+            rand = random.randint(1, count)
+            records = self.db['restaurants'].find().limit(-1).skip(rand).next()
+            return records
+        except:
+            traceback.print_exc()
+            return 'failed'
+
+#Restaurants().getRandom()
 # for r in Restaurants().getRestaurantsInVicinity(Restaurants().getLatLongFromZipCode('85053'), 0.030):
 #       print r
 # for r in Restaurants().getForZip('85053'):

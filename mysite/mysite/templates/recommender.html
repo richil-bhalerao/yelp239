@@ -1,0 +1,75 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script language="javascript" type="text/javascript">
+	function dropDownList(listindex)
+	{
+
+		document.formname.subcategory.options.length = 0;
+		
+		switch(listindex)
+		{
+		case "AmericanTraditional":
+			document.formname.subcategory.options[0]=new Option("Select Specialty","");
+			document.formname.subcategory.options[1]=new Option("sandwich","sandwich");
+			document.formname.subcategory.options[2]=new Option("pizza","pizza");
+			document.formname.subcategory.options[3]=new Option("burger","burger");
+			document.formname.subcategory.options[4]=new Option("cheesesteak","cheesesteak");
+			document.formname.subcategory.options[5]=new Option("hotdog","hotdog");
+			document.formname.subcategory.options[6]=new Option("fish&chip","fishchip");
+			document.formname.subcategory.options[7]=new Option("donut","donut");
+			break;
+		}
+		return true;
+	}
+	</script>
+</head>
+<title>Yelp Dataset Analizer for new business openers</title>
+<body bgcolor="#FF4500">
+	</br></br><center>Please Enter Zip code and select Type, Cuisine, and Speciality of your choice!</center></br></br></br>
+
+<div class="reco">
+<form id="formname" name="formname">
+	<center> Zip Code: <input type="text" name="zip" size="4" maxlength="5"> </br></br>
+	<select name="Type">
+		<option value="restaurants">Restaurants</option>
+		<option value="delies">Delis</option>
+		<option value="fastfood">Fast Food</option>
+		<option value="bakeries">Bakeries</option>
+		<option value="diners">Diners</option>
+		<option value="buffets">Buffets</option>
+		<option value="sushibars">Sushi Bars</option>
+	</select> </br>
+
+	<select name="Cuisine" id="cuisine" onchange="javascript: dropDownList(this.options[this.selectedIndex].value);">
+		<option value="">Select Cuisine</option>
+		<option value="AmericanTraditional">American(Traditional)</option>
+		<option value="AmericanNew">American(New)</option>
+		<option value="Mexican">Mexican</option>
+		<option value="Chinese">Chinese</option>
+		<option value="Japanese">Japanese</option>
+		<option value="Italian">Italian</option>
+		<option value="Caribbean">Caribbean</option>
+		<option value="Barbeque">Barbeque</option>
+		<option value="Seafood">Seafood</option>
+		<option value="Mediterranean">Mediteranean</option>
+		<option value="Indian">Indian</option>
+		<option value="Thai">Thai</option>
+		<option value="Hawaiian">Hawaiian</option>
+		<option value="Vietnamese">Vietnamese</option>
+	</select> </br>
+	
+
+	<script type="text/javascript" language="JavaScript">
+	document.write('<select name="subcategory"><option value="">Select Specialty</option></select>')
+	</script>
+	<noscript><select name="subcategory" id="subcategory" >
+	</select>
+    </noscript> </br></br>
+
+<input type="submit" value="Submit">
+</div>
+</center>
+</form>
+
+
+</body>

@@ -43,7 +43,8 @@ def get_business(id):
     print 'You are in get business service'
 
     try:
-        entity = businessobj.get(id)
+        entity = restaurant.getRandom()
+        #print entity
     except:
         traceback.print_exc()
         abort(404, 'business cannot be retrieved')    
